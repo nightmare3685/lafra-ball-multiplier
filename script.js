@@ -1,5 +1,6 @@
 (() => {
   'use strict';
+  const LABELS = ['Win', 'シャルベProg', 'クリームパワー', 'パレッタNEXT', 'パレッタProg', 'フェレッタProg', '草原パワー'];
   const INITIAL = ['50', '3', '3', '30', '750', '75000', '10'];
   const $ = id => document.getElementById(id);
   const nInput = $('n');
@@ -99,7 +100,7 @@
         catch { throw new Error(`${i + 1}番目の数値「${item}」が不正です。`); }
         const output = decimalString(v.int * multInt, v.scale + multScale);
         const tr = document.createElement('tr');
-        for (const t of [String(i + 1), decimalString(v.int, v.scale, true), decimalString(v.int * multInt, v.scale + multScale, true)]) {
+        for (const t of [LABELS[i] || String(i + 1), decimalString(v.int, v.scale, true), decimalString(v.int * multInt, v.scale + multScale, true)]) {
           const cell = document.createElement('td');
           cell.textContent = t;
           tr.appendChild(cell);
