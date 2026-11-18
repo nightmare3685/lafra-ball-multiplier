@@ -97,7 +97,7 @@
           <option value="100000">100,000</option>
         </select>
       </div>
-      <p id="n-note" class="field-note">▲▼でNを整数単位で増減できます（最小値は1です）。小数・0・負数は入力できません。倍率の計算式：<code>M(d) = 1 + N × 0.0001</code></p>
+      <p id="n-note" class="field-note">▲▼でNを整数単位で増減できます（最小値は1です）。小数・0・負数は入力できません。倍率の計算式：<code>M(d) = 1 + N × 0.001</code></p>
       <label for="values" class="field">掛け算する数値の一覧</label>
       <textarea id="values" spellcheck="false" aria-describedby="values-note">50
 3
@@ -117,8 +117,8 @@
       <h2 id="result-title">計算結果</h2>
       <div class="result-box">
         <p class="eyebrow">現在の倍率 M(d)</p>
-        <div class="big"><span id="multiplier">2</span> 倍</div>
-        <div class="formula" id="formula">1 + 10000 × 0.0001 = 2</div>
+        <div class="big"><span id="multiplier">11</span> 倍</div>
+        <div class="formula" id="formula">1 + 10000 × 0.001 = 11</div>
       </div>
       <div class="table-wrap">
         <table aria-label="数値ごとの倍率計算結果">
@@ -136,6 +136,6 @@
   </div>
   <p class="footer">小数計算は JavaScript 標準の <code>BigInt</code> を使った10進整数演算です。外部ライブラリ・外部通信は使用していません。</p>
 </main>
-<script src="./script.js?v=047fa31" defer></script>
+<script src="./script.js?v=20261118-001" defer></script>
 </body>
 </html>

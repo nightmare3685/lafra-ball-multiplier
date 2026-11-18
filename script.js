@@ -86,12 +86,12 @@
       if (!inputs.length) throw new Error('掛け算する数値を1個以上入力してください。');
       if (inputs.length > 200) throw new Error('一度に計算できる数値は200個までです。');
 
-      // M = 1 + N/10000 = (10000 + N) / 10000。
-      const multScale = 4;
-      const multInt = 10000n + n;
+      // M = 1 + N/1000 = (1000 + N) / 1000。
+      const multScale = 3;
+      const multInt = 1000n + n;
       const multiplier = decimalString(multInt, multScale);
       $('multiplier').textContent = decimalString(multInt, multScale, true);
-      $('formula').textContent = `1 + ${decimalString(n, 0, true)} × 0.0001 = ${decimalString(multInt, multScale, true)}`;
+      $('formula').textContent = `1 + ${decimalString(n, 0, true)} × 0.001 = ${decimalString(multInt, multScale, true)}`;
 
       const detailLines = [`N = ${n.toString()}`, `M(d) = ${multiplier}`, ''];
       inputs.forEach((item, i) => {
