@@ -98,6 +98,7 @@
         </select>
       </div>
       <p id="n-note" class="field-note">▲▼でNを整数単位で増減できます（最小値は1です）。小数・0・負数は入力できません。倍率の計算式：<code>M(d) = 1 + N × 0.001</code></p>
+      <div hidden>
       <label for="values" class="field">掛け算する数値の一覧</label>
       <textarea id="values" spellcheck="false" aria-describedby="values-note">50
 3
@@ -107,6 +108,7 @@
 75000
 10</textarea>
       <p id="values-note" class="field-note">数値は改行・半角スペース・カンマで区切れます。小数にも対応します。</p>
+      </div>
       <div class="button-row">
         <button type="button" id="reset">初期値に戻す</button>
         <button type="button" id="clear">N を消去</button>
@@ -131,7 +133,7 @@
         <button type="button" id="copy-details">計算詳細をコピー</button>
       </div>
       <p class="status" id="status" aria-live="polite"></p>
-      <p class="hint">一覧の編集や N の変更は即座に反映します。フェレッタProg以外は小数第1位を四捨五入して整数にします。コピーにも同じ丸めを適用し、上から順に改行で区切ります。</p>
+      <p class="hint">N の変更は即座に反映します。フェレッタProg以外は小数第1位を四捨五入して整数にします。コピーにも同じ丸めを適用し、上から順に改行で区切ります。</p>
     </section>
   </div>
   <p class="footer">小数計算は JavaScript 標準の <code>BigInt</code> を使った10進整数演算です。外部ライブラリ・外部通信は使用していません。</p>
