@@ -39,6 +39,14 @@
     return (negative && integer !== 0n ? '-' : '') + whole + (fractional ? '.' + fractional : '');
   }
 
+  // 四捨五入は整数演算で行う。負数も絶対値の5以上を切り上げる。
+  function roundInteger(integer, scale) {
+    const divisor = 10n ** BigInt(scale);
+    const magnitude = integer < 0n ? -integer : integer;
+    const rounded = (magnitude + divisor / 2n) / divisor;
+    return integer < 0n ? -rounded : rounded;
+  }
+
   // N は自然数（1以上の整数）だけ。大きい数も BigInt で厳密に扱う。
   function parseNaturalN(input) {
     const s = input.trim();
@@ -98,16 +106,22 @@
         let v;
         try { v = parseDecimal(item); }
         catch { throw new Error(`${i + 1}番目の数値「${item}」が不正です。`); }
-        const output = decimalString(v.int * multInt, v.scale + multScale);
+        const exactInt = v.int * multInt;
+        const exactScale = v.scale + multScale;
+        const keepDecimals = LABELS[i] === 'フェレッタProg';
+        const outputInt = keepDecimals ? exactInt : roundInteger(exactInt, exactScale);
+        const outputScale = keepDecimals ? exactScale : 0;
+        const output = decimalString(outputInt, outputScale);
         const tr = document.createElement('tr');
-        for (const t of [LABELS[i] || String(i + 1), decimalString(v.int, v.scale, true), decimalString(v.int * multInt, v.scale + multScale, true)]) {
+        for (const t of [LABELS[i] || String(i + 1), decimalString(v.int, v.scale, true), decimalString(outputInt, outputScale, true)]) {
           const cell = document.createElement('td');
           cell.textContent = t;
           tr.appendChild(cell);
         }
         tbody.appendChild(tr);
         resultsRaw.push(output);
-        detailLines.push(`${decimalString(v.int, v.scale)} × ${multiplier} = ${output}`);
+        const exact = decimalString(exactInt, exactScale);
+        detailLines.push(`${decimalString(v.int, v.scale)} × ${multiplier} = ${exact}${output !== exact ? ` → ${output}（四捨五入）` : ''}`);
       });
       detailsRaw = detailLines.join('\n');
       errorEl.textContent = '';
