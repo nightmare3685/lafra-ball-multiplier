@@ -109,8 +109,8 @@
         const exactInt = v.int * multInt;
         const exactScale = v.scale + multScale;
         const keepDecimals = LABELS[i] === 'フェレッタProg';
-        const outputInt = keepDecimals ? exactInt : roundInteger(exactInt, exactScale);
-        const outputScale = keepDecimals ? exactScale : 0;
+        const outputInt = keepDecimals ? exactInt : roundInteger(exactInt, exactScale - 1);
+        const outputScale = keepDecimals ? exactScale : 1;
         const output = decimalString(outputInt, outputScale);
         const tr = document.createElement('tr');
         for (const t of [LABELS[i] || String(i + 1), decimalString(v.int, v.scale, true), decimalString(outputInt, outputScale, true)]) {
